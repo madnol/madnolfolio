@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { cases } from "../../data/work";
+
+export function getStaticPaths() {
+  return cases.map((c) => ({
+    params: { slug: c.slug },
+    props: { case: c },
+  }));
+}
+
+const { case: c } = Astro.props;
+---
+
+<BaseLayout title={`${c.title} — madnol.dev`}>
+  <div class="container case-page">
+    <a href="/#work" class="back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M13 8H3M7 4L3 8l4 4"/>
+      </svg>
+      Back to work
+    </a>
+
+    <article>
+      <header class="case-header">
+        <p class="eyebrow">{c.eyebrow}</p>
+        <h1>{c.title}</h1>
+        <div class="tags">
+          {c.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+      </header>
+
+      <div class="case-body">
+        <p class="lead">{c.body}</p>
+        <div class="outcome-block">
+          <p class="outcome-label">Outcome</p>
+          <p class="outcome-text">{c.outcome}</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .case-page {
+    padding-block: var(--space-xl);
+    max-width: 70ch;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    text-decoration: none;
+    margin-bottom: var(--space-xl);
+    transition: color var(--transition), gap var(--transition);
+  }
+
+  .back:hover {
+    color: var(--color-primary);
+    gap: var(--space-sm);
+  }
+
+  .back svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .case-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: var(--space-lg);
+    line-height: 1.15;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .case-body {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .lead {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .outcome-block {
+    border-left: 2px solid var(--color-primary);
+    padding-left: var(--space-lg);
+  }
+
+  .outcome-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .outcome-text {
+    color: var(--color-muted);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>
