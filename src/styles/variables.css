@@ -1,0 +1,55 @@
+:root {
+
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 4rem;
+
+    /* Typography */
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    /* Layout */
+    --container-max: 1100px;
+    --radius: 6px;
+    --transition: 200ms ease;
+    --header-height: 70px;
+}
+
+/* Light theme — Ink & Paper */
+:root,
+[data-theme='light'] {
+    --color-bg: #f6f3ec;
+    --color-bg-rgb: 246, 243, 236;
+    --color-surface: #ffffff;
+    --color-text: #1a1a1a;
+    --color-muted: #6b6b6b;
+    --color-primary: #b8350f;
+    --color-border: #e4dfd3;
+}
+
+/* Dark theme — Iron & Bone */
+[data-theme='dark'] {
+    --color-bg: #14130f;
+    --color-bg-rgb: 20, 19, 15;
+    --color-surface: #1f1d18;
+    --color-text: #ede9df;
+    --color-muted: #8a857a;
+    --color-primary: #d96a3f;
+    --color-border: #2c2a23;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --color-bg: #14130f;
+        --color-bg-rgb: 20, 19, 15;
+        --color-surface: #1f1d18;
+        --color-text: #ede9df;
+        --color-muted: #8a857a;
+        --color-primary: #d96a3f;
+        --color-border: #2c2a23;
+    }
+}
