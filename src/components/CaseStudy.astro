@@ -1,0 +1,113 @@
+---
+interface Props {
+  slug: string;
+  eyebrow: string;
+  title: string;
+  body: string;
+  outcome: string;
+  tags: string[];
+}
+
+const { slug, eyebrow, title, body, outcome, tags } = Astro.props;
+---
+
+<article class="case">
+  <div class="case-header">
+    <p class="case-eyebrow">{eyebrow}</p>
+    <div class="tags">
+      {tags.map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+  </div>
+  <h3>{title}</h3>
+  <p class="body">{body}</p>
+  <p class="outcome"><span>Outcome —</span> {outcome}</p>
+  <a href={`/work/${slug}`} class="read-more">
+    Read case study
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 8h10M9 4l4 4-4 4"/>
+    </svg>
+  </a>
+</article>
+
+<style>
+  .case {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-lg);
+    max-width: 70ch;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .case-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .case-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .body {
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .outcome {
+    color: var(--color-muted);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .outcome span {
+    font-family: var(--font-mono);
+    font-style: normal;
+    color: var(--color-primary);
+    font-size: 0.85em;
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    text-decoration: none;
+    margin-top: var(--space-sm);
+    transition: gap var(--transition);
+  }
+
+  .read-more:hover {
+    gap: var(--space-sm);
+  }
+
+  .read-more svg {
+    width: 14px;
+    height: 14px;
+  }
+</style>

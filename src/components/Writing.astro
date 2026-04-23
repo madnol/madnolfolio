@@ -1,0 +1,84 @@
+---
+const posts: { date: string; title: string; excerpt: string; href: string }[] =
+  [];
+---
+
+<section id="writing" class="section container">
+  <p class="eyebrow">Writing</p>
+  <h2>Notes on the <span class="italic">craft</span>.</h2>
+
+  {
+    posts.length > 0 ? (
+      <ul class="posts">
+        {posts.map((p) => (
+          <li>
+            <a href={p.href}>
+              <span class="date">{p.date}</span>
+              <h3>{p.title}</h3>
+              <p>{p.excerpt}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="empty">
+        <p>Nothing published yet — check back soon.</p>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .posts {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-xl) 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .posts li {
+    border-top: 1px solid var(--color-border);
+  }
+  .posts li:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .posts a {
+    display: block;
+    padding: var(--space-lg) 0;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: padding var(--transition);
+  }
+  .posts a:hover {
+    padding-left: var(--space-md);
+  }
+  .date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .posts h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin: var(--space-sm) 0;
+  }
+  .posts p {
+    color: var(--color-muted);
+    max-width: 60ch;
+  }
+  h2 .italic {
+    font-style: italic;
+    color: var(--color-primary);
+  }
+  .empty {
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-xl) 0;
+    margin-top: var(--space-xl);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+</style>

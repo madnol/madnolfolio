@@ -1,0 +1,61 @@
+---
+
+---
+
+<section class="hero container">
+  <p class="eyebrow">Software Engineer</p>
+  <h1>
+    In pursuit<br />
+    of <span class="italic">good systems</span>.
+  </h1>
+  <p class="tagline">
+    I'm <strong>Manuel Desole</strong> — software engineer focused on the whole picture:
+    the problem, the architecture, the product, the craft. Built end to end, with
+    intent.
+  </p>
+</section>
+
+<style>
+  .hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: var(--space-xl);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-md);
+  }
+
+  h1 {
+    margin-bottom: var(--space-lg);
+  }
+
+  h1 .italic {
+    font-style: italic;
+    font-weight: 900;
+    color: var(--color-primary);
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+    max-width: 60ch;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    h1 br {
+      display: none;
+    }
+    .tagline br {
+      display: none;
+    }
+  }
+</style>

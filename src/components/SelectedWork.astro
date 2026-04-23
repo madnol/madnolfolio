@@ -1,0 +1,45 @@
+---
+import CaseStudy from "../components/CaseStudy.astro";
+import { cases } from "../data/work";
+---
+
+<section id="work" class="section container">
+  <p class="eyebrow">Selected Work</p>
+  <h2>Problems I've <span class="italic">owned</span>.</h2>
+
+  {
+    cases.length > 0 ? (
+      <div class="cases">
+        {cases.map((c) => (
+          <CaseStudy {...c} />
+        ))}
+      </div>
+    ) : (
+      <div class="empty">
+        <p>Case studies coming soon.</p>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .cases {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+  h2 .italic {
+    font-style: italic;
+    color: var(--color-primary);
+  }
+  .empty {
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-xl) 0;
+    margin-top: var(--space-xl);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+</style>

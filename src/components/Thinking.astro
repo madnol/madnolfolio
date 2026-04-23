@@ -1,0 +1,60 @@
+---
+const principles = [
+  {
+    title: "The problem before the stack.",
+    body: "Tools change every year. The discipline of understanding what you're actually solving doesn’t. I start there — using domain discovery, value mapping, and mental models to define the real problem before touching code.",
+  },
+  {
+    title: "The system before the feature.",
+    body: "A feature shipped on a fragile foundation creates two problems instead of solving one. I build with vertical slicing, horizontal decoupling, and the 4-tier architecture — so every feature lands on a system that scales, tests, and evolves.",
+  },
+  {
+    title: "Ownership is end to end.",
+    body: "Product, architecture, and craft are not separate disciplines handed off between roles. They are one practice — and I treat them as such by owning the feedback loop: from user story to deployment, from test to production.",
+  },
+  {
+    title: "Craft is non-negotiable.",
+    body: "How something is built shows in how it ages. I care about the parts no one will ever see — encapsulation, composition, subject verification — because eventually, they always do. And that’s where maintainability lives.",
+  },
+];
+---
+
+<section id="thinking" class="section container">
+  <p class="eyebrow">How I Think</p>
+  <h2>Four <span class="italic">principles</span>.</h2>
+
+  <div class="principles">
+    {
+      principles.map((p) => (
+        <div class="principle">
+          <h3>{p.title}</h3>
+          <p>{p.body}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+  .principle h3 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+  .principle p {
+    color: var(--color-muted);
+    max-width: 40ch;
+  }
+  h2 .italic {
+    font-style: italic;
+    color: var(--color-primary);
+  }
+</style>

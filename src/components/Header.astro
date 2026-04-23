@@ -1,0 +1,326 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="brand">madnol<span class="tld">.dev</span></a>
+
+    <div class="header-right">
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <a href="#work">Work</a>
+        <a href="#thinking">Thinking</a>
+        <a href="#writing">Writing</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <ThemeToggle />
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="mobile-menu"
+    id="mobile-menu"
+    aria-label="Mobile navigation"
+    data-mobile-menu
+  >
+    <nav class="nav-mobile">
+      <a href="#work">Work</a>
+      <a href="#thinking">Thinking</a>
+      <a href="#writing">Writing</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(var(--color-bg-rgb), 0.95);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 200ms ease,
+      background 200ms ease;
+  }
+
+  @supports (backdrop-filter: blur(20px)) or
+    (-webkit-backdrop-filter: blur(20px)) {
+    .site-header {
+      background: rgba(var(--color-bg-rgb), 0.72);
+    }
+  }
+
+  .site-header.scrolled {
+    border-bottom-color: var(--color-border);
+  }
+
+  @supports (backdrop-filter: blur(20px)) or
+    (-webkit-backdrop-filter: blur(20px)) {
+    .site-header.scrolled {
+      background: rgba(var(--color-bg-rgb), 0.78);
+    }
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: var(--space-lg);
+    padding-block: var(--space-md);
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+  }
+
+  .brand .tld {
+    color: var(--color-primary);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-shrink: 0;
+  }
+
+  .nav-desktop {
+    display: flex;
+    gap: var(--space-lg);
+  }
+
+  .nav-desktop a {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 200ms ease;
+    white-space: nowrap;
+  }
+
+  .nav-desktop a:hover,
+  .nav-desktop a.active {
+    color: var(--color-primary);
+  }
+
+  .menu-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    transition: border-color var(--transition);
+    flex-shrink: 0;
+  }
+
+  .menu-toggle:hover {
+    border-color: var(--color-primary);
+  }
+
+  .menu-toggle .bar {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition:
+      transform 250ms ease,
+      opacity 200ms ease;
+    transform-origin: center;
+  }
+
+  .menu-toggle[aria-expanded="true"] .bar:nth-child(1) {
+    transform: translateY(5.5px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded="true"] .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle[aria-expanded="true"] .bar:nth-child(3) {
+    transform: translateY(-5.5px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(var(--color-bg-rgb), 0.98);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--color-border);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 350ms ease;
+  }
+
+  .mobile-menu.open {
+    max-height: 100vh;
+  }
+
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md) var(--space-lg) var(--space-lg);
+  }
+
+  .nav-mobile a {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--color-text);
+    text-decoration: none;
+    padding-block: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    transition:
+      color var(--transition),
+      padding-left var(--transition);
+  }
+
+  .nav-mobile a:last-child {
+    border-bottom: none;
+  }
+
+  .nav-mobile a:hover,
+  .nav-mobile a.active {
+    color: var(--color-primary);
+    padding-left: var(--space-sm);
+  }
+
+  /* Mobile breakpoint */
+  @media (max-width: 720px) {
+    .nav-desktop {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: inline-flex;
+    }
+
+    .mobile-menu {
+      display: block;
+    }
+
+    .header-right {
+      gap: var(--space-md);
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector(".site-header");
+  const onScroll = () => {
+    if (window.scrollY > 10) {
+      header?.classList.add("scrolled");
+    } else {
+      header?.classList.remove("scrolled");
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  const sections = document.querySelectorAll("section[id]");
+  const allNavLinks = document.querySelectorAll(
+    '.nav-desktop a[href^="#"], .nav-mobile a[href^="#"]',
+  );
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+
+          allNavLinks.forEach((link) => {
+            const isActive = link.getAttribute("href") === `#${id}`;
+            link.classList.toggle("active", isActive);
+            link.setAttribute("aria-current", isActive ? "true" : "false");
+          });
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" },
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  const menuToggle = document.querySelector("[data-menu-toggle]");
+  const mobileMenu = document.querySelector("[data-mobile-menu]");
+  const mobileLinks = document.querySelectorAll(".nav-mobile a");
+
+  const closeMenu = () => {
+    menuToggle?.setAttribute("aria-expanded", "false");
+    mobileMenu?.classList.remove("open");
+    mobileMenu?.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  const openMenu = () => {
+    menuToggle?.setAttribute("aria-expanded", "true");
+    mobileMenu?.classList.add("open");
+    mobileMenu?.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  menuToggle?.addEventListener("click", () => {
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Close on link click
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  // Close on resize to desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 720) closeMenu();
+  });
+</script>
